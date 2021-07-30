@@ -23,22 +23,24 @@ class Board extends React.Component {
   }
 
   render() {
+    let boardDivs = []
+    for(let i = 0; i<9;i=i+3){
+      boardDivs.push(
+        this.renderSquare(i),
+        this.renderSquare(i+1),
+        this.renderSquare(i+2),
+      )
+    }
     return (
       <div>
         <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
+          {boardDivs.slice(0,3)}
         </div>
         <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
+          {boardDivs.slice(3,6)}
         </div>
         <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
+          {boardDivs.slice(6,9)}
         </div>
       </div>
     );
@@ -89,7 +91,7 @@ class Game extends React.Component {
       return (
         <li key={move}>
           <button 
-            style={move==this.state.stepNumber?{fontWeight:"bold"}:{}} 
+            style={move===this.state.stepNumber?{fontWeight:"bold"}:{}} 
             onClick={() => this.jumpTo(move)}
           >
             {desc}
